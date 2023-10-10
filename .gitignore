@@ -7,7 +7,8 @@ __pycache__/
 *.so
 
 # Vector DB
-sense2vec_vectors
+s2v_reddit_2015*
+s2v_old
 
 # Distribution / packaging
 .Python
