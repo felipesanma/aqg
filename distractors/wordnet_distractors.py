@@ -13,7 +13,7 @@ class WordnetDistractors:
     def _get_syn_to_use(self):
         return wn.synsets(self.word, "n")
 
-    def get_distractors_wordnet(self) -> list:
+    def get_distractors(self) -> list:
         # lower_word = self.word.lower()
         distractors = []
         for syn in self.syn:
@@ -33,3 +33,9 @@ class WordnetDistractors:
                     distractors.append(name)
 
         return distractors
+
+
+word = "lion"
+disctract = WordnetDistractors(word)
+distractors = disctract.get_distractors()
+print(distractors)
