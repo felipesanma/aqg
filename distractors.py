@@ -5,7 +5,7 @@ from nltk.corpus import wordnet as wn
 # Distractors from Wordnet
 
 
-class Distractors:
+class WordnetDistractors:
     def __init__(self, word: str):
         self.word = word
         self.syn = self._get_syn_to_use()
@@ -17,12 +17,13 @@ class Distractors:
         # lower_word = self.word.lower()
         distractors = []
         for syn in self.syn:
-            hypernym = syn.hypernyms()
+            hypernyms = syn.hypernyms()
 
-            if len(hypernym) == 0:
+            if len(hypernyms) == 0:
                 continue
 
-            for item in hypernym[0].hyponyms():
+            print(hypernyms)
+            for item in hypernyms[0].hyponyms():
                 name = item.lemmas()[0].name()
 
                 if name == self.word:
@@ -32,10 +33,3 @@ class Distractors:
                     distractors.append(name)
 
         return distractors
-
-
-word = "green"
-distract = Distractors(word)
-
-distractors = distract.get_distractors_wordnet()
-print(distractors)
