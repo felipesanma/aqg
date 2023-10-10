@@ -10,6 +10,9 @@ __pycache__/
 s2v_reddit_2015*
 s2v_old
 
+#Pipes venv
+aqg-v1
+
 # Distribution / packaging
 .Python
 build/
