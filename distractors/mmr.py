@@ -1,5 +1,4 @@
 from typing import List, Tuple
-import itertools
 from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
 
