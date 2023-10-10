@@ -6,6 +6,9 @@ __pycache__/
 # C extensions
 *.so
 
+# Vector DB
+sense2vec_vectors
+
 # Distribution / packaging
 .Python
 build/

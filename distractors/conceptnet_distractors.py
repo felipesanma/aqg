@@ -1,7 +1,4 @@
 import requests
-import json
-import re
-import random
 
 
 class ConcepnetDistractors:
