@@ -1,14 +1,30 @@
 import torch
 from transformers import T5ForConditionalGeneration, T5Tokenizer
 
+"""
+Model and Tokenizer V1: trained with 1000 rows 
+-> question_generator/model/v1 
+-> question_generator/tokenizer/v1
+
+Model and Tokenizer V2: trained with 3000 rows
+-> question_generator/model/v2
+-> question_generator/tokenizer/v2
+
+Model and Tokenizer V3: trained with all rows from datasets (78664 rows-train, 9652 rows-validation)
+-> question_generator/model/v3
+-> question_generator/tokenizer/v3
+"""
+
 
 def question_parser(question: str) -> str:
     return " ".join(question.split(":")[1].split())
 
 
-def generate_questions(context: str, answer: str, n_questions: int = 1):
-    trained_model_path = "question_generator/model/"
-    trained_tokenizer = "question_generator/tokenizer/"
+def generate_questions(
+    context: str, answer: str, n_questions: int = 1, model_version: str = "v1"
+):
+    trained_model_path = f"question_generator/model/{model_version}"
+    trained_tokenizer = f"question_generator/tokenizer/{model_version}"
 
     model = T5ForConditionalGeneration.from_pretrained(trained_model_path)
     tokenizer = T5Tokenizer.from_pretrained(trained_tokenizer)
