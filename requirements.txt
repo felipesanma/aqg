@@ -8,3 +8,5 @@ datasets
 tqdm
 termcolor
 pytorch-lightning
+flashtext
+git+https://github.com/boudinfl/pke.git

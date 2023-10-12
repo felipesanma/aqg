@@ -68,5 +68,5 @@ def generate_questions(
 context = "President Donald Trump said and predicted that some states would reopen this month."
 answer = "Donald Trump"
 
-questions = generate_questions(context, answer, 1)
+questions = generate_questions(context, answer, 1, "v2")
 print(questions)
