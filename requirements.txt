@@ -1,3 +1,5 @@
 nltk
 sense2vec
 sentence_transformers
+stanza
+openai
