@@ -19,9 +19,9 @@ nltk.download("punkt")
 class FillBlanks:
     def __init__(self, text: str):
         self.text = text
-        self.sentences = self._tokenize_sentences()
-        self.key_words = self._get_noun_adj_verb()
-        self.sentence_mapping = self._get_sentences_for_keyword()
+        self.sentences = self.tokenize_sentences()
+        self.key_words = self.get_noun_adj_verb()
+        self.sentence_mapping = self.get_sentences_for_keyword()
 
     def _print_wrapper_text(self):
         wrapper = textwrap.TextWrapper(width=150)
@@ -29,12 +29,12 @@ class FillBlanks:
         for element in word_list:
             print(element)
 
-    def _tokenize_sentences(self):
+    def tokenize_sentences(self):
         sentences = sent_tokenize(self.text)
         sentences = [sentence.strip() for sentence in sentences if len(sentence) > 20]
         return sentences
 
-    def _get_noun_adj_verb(self):
+    def get_noun_adj_verb(self):
         out = []
         try:
             extractor = pke.unsupervised.MultipartiteRank()
@@ -58,7 +58,7 @@ class FillBlanks:
 
         return out
 
-    def _get_sentences_for_keyword(self):
+    def get_sentences_for_keyword(self):
         keyword_processor = KeywordProcessor()
         keyword_sentences = {}
         for word in self.key_words:
