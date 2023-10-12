@@ -3,3 +3,4 @@ sense2vec
 sentence_transformers
 stanza
 openai
+scipy
