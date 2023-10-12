@@ -145,3 +145,7 @@ myenv
 # PDF extensions
 *.pdf
 
+# Model Generation
+dataset
+model
+tokenizer

@@ -4,3 +4,7 @@ sentence_transformers
 stanza
 openai
 scipy
+datasets
+tqdm
+termcolor
+pytorch-lightning
