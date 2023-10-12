@@ -7,6 +7,16 @@ load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
+def process_gpt_response(text):
+    t2 = text.split(".")
+    sentences = []
+    for e in t2:
+        s = e.replace("\n", "")
+        if len(s.split()) > 1:
+            sentences.append(" ".join(e.split()))
+    return sentences
+
+
 def chatGPT(text):
     try:
         response = openai.Completion.create(
@@ -21,4 +31,4 @@ def chatGPT(text):
     except Exception as err:
         print(err)
         response = {"choices": [{"text": ""}]}
-    return response["choices"][0]["text"]
+    return process_gpt_response(response["choices"][0]["text"])
