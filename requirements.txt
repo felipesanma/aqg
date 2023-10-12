@@ -5,6 +5,7 @@ stanza
 openai
 scipy
 datasets
+networkx
 tqdm
 termcolor
 pytorch-lightning
