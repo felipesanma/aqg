@@ -3,7 +3,7 @@ import scipy
 
 
 def bert_filter_false_sentences(
-    original_sentence: str, possible_false_sentences: list, top_n: int
+    original_sentence: str, possible_false_sentences: list, top_n: int = 2
 ):
     BERT_model = SentenceTransformer("distilbert-base-nli-stsb-mean-tokens")
 

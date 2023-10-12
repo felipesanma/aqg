@@ -2,6 +2,7 @@ import stanza
 from nltk.tree import Tree
 import re
 from alternative_endings_gpt3 import chatGPT
+from filter_alternatives_bert import bert_filter_false_sentences
 
 
 class ConstituencyParser:
@@ -61,9 +62,6 @@ class ConstituencyParser:
         longest_phrase_to_use = re.sub(r" -RRB-", ")", longest_phrase_to_use)
 
         split_sentence = self._get_termination_portion(self.text, longest_phrase_to_use)
-        print("Original sentence : ", self.text)
-        print("Original sentence after splitting at ending phrase: ", split_sentence)
-        print("Ending phrase: ", longest_phrase_to_use)
 
         return split_sentence, longest_phrase_to_use
 
@@ -74,4 +72,9 @@ starting_phrase, ending_phrase = phrase_parser.get_true_statement()
 prompt = f"The original phrase is: '{test_sentence}'. Generate 10 alternative endings starting with the phrase: '{starting_phrase}'"
 
 alternative_endings_davinci = chatGPT(prompt)
-print(alternative_endings_davinci)
+best_alternatives = bert_filter_false_sentences(
+    test_sentence, alternative_endings_davinci
+)
+print("Original sentence :    ", test_sentence)
+for alt in best_alternatives:
+    print("Alternative sentence : ", alt)
