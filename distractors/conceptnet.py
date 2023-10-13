@@ -25,7 +25,9 @@ class ConcepnetDistractors:
         return distractor_list
 
 
+"""
 word = "lion"
 disctract = ConcepnetDistractors(word)
 distractors = disctract.get_distractors()
 print(distractors)
+"""

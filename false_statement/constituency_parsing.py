@@ -66,6 +66,7 @@ class ConstituencyParser:
         return split_sentence, longest_phrase_to_use
 
 
+"""
 test_sentence = "The old woman was sitting under a tree and sipping coffee."
 phrase_parser = ConstituencyParser(test_sentence)
 starting_phrase, ending_phrase = phrase_parser.get_true_statement()
@@ -78,3 +79,4 @@ best_alternatives = bert_filter_false_sentences(
 print("Original sentence :    ", test_sentence)
 for alt in best_alternatives:
     print("Alternative sentence : ", alt)
+"""

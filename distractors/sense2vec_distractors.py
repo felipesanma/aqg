@@ -5,7 +5,7 @@ from collections import OrderedDict
 class Sense2VecDistractors:
     def __init__(self, word: str):
         self.word = word
-        self.s2v = Sense2Vec().from_disk("s2v_old")
+        self.s2v = Sense2Vec().from_disk("distractors/s2v_old")
 
     def get_distractors(self, k: int = 10):
         distractor_list = []
@@ -21,7 +21,9 @@ class Sense2VecDistractors:
         return out
 
 
+"""
 word = "lion"
 disctract = Sense2VecDistractors(word)
 distractors = disctract.get_distractors()
 print(distractors)
+"""

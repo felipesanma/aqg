@@ -1,8 +1,7 @@
+# Run 1st time
 # import nltk
 # nltk.download("wordnet")
 from nltk.corpus import wordnet as wn
-
-# Distractors from Wordnet
 
 
 class WordnetDistractors:
@@ -14,7 +13,6 @@ class WordnetDistractors:
         return wn.synsets(self.word, "n")
 
     def get_distractors(self) -> list:
-        # lower_word = self.word.lower()
         distractors = []
         for syn in self.syn:
             hypernyms = syn.hypernyms()
@@ -22,7 +20,6 @@ class WordnetDistractors:
             if len(hypernyms) == 0:
                 continue
 
-            print(hypernyms)
             for item in hypernyms[0].hyponyms():
                 name = item.lemmas()[0].name()
 
@@ -35,7 +32,9 @@ class WordnetDistractors:
         return distractors
 
 
+"""
 word = "lion"
 disctract = WordnetDistractors(word)
 distractors = disctract.get_distractors()
 print(distractors)
+"""
