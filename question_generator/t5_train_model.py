@@ -1,28 +1,9 @@
 import argparse
-import glob
-import os
-import json
-import time
-import logging
-import random
-import re
-from itertools import chain
-from string import punctuation
 
 import pandas as pd
-import numpy as np
-import torch
 from torch.utils.data import Dataset, DataLoader
 
-from termcolor import colored
-import textwrap
-
-from transformers import (
-    AdamW,
-    T5ForConditionalGeneration,
-    T5Tokenizer,
-    get_linear_schedule_with_warmup,
-)
+from transformers import AdamW, T5ForConditionalGeneration, T5Tokenizer
 
 from tqdm.notebook import tqdm
 import copy
