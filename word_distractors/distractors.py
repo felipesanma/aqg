@@ -4,7 +4,7 @@ from sense2vec_distractors import Sense2VecDistractors
 from sentence_transformers_filter import TransformersFilter
 
 
-class Distractors:
+class WordDistractors:
     def __init__(self, word: str, distractor_type: str = "sense2vec"):
         self.word = word
         self.distractor_type = distractor_type
@@ -50,5 +50,5 @@ class Distractors:
 
 
 word = "lion"
-distractors = Distractors(word)
+distractors = WordDistractors(word)
 print(distractors.get_best(5))
