@@ -1,33 +1,16 @@
-import json
-import requests
-import string
 import re
-import nltk
-import string
-import itertools
 import textwrap
-import os
-import zipfile
 import torch
-import math
+import pke
+import traceback
 from transformers import BertModel, BertConfig, BertPreTrainedModel, BertTokenizer
-import torch
-import re
-import time
-import torch
-import csv
-import os
 from collections import namedtuple
-import statistics
 from statistics import mode
-import re
-
-import nltk
 from nltk.corpus import wordnet as wn
-from tabulate import tabulate
+from nltk.tokenize import sent_tokenize
+from flashtext import KeywordProcessor
 from torch.nn.functional import softmax
 from tqdm import tqdm
-from transformers import BertTokenizer
 
 """
 nltk.download("stopwords")
@@ -35,13 +18,6 @@ nltk.download("wordnet")
 nltk.download("punkt")
 nltk.download('omw-1.4')
 """
-
-import pke
-from nltk.corpus import stopwords
-from nltk.corpus import wordnet
-import traceback
-from nltk.tokenize import sent_tokenize
-from flashtext import KeywordProcessor
 
 
 def tokenize_sentences(text):
@@ -145,10 +121,13 @@ class BertWSD(BertPreTrainedModel):
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model_dir = "match_word_meaning/bert_base-augmented-batch_size=128-lr=2e-5-max_gloss=6"
-
+# config = BertConfig()
+# config.vocab_size = tokenizer.vocab_size
 
 model = BertWSD.from_pretrained(model_dir)
 tokenizer = BertTokenizer.from_pretrained(model_dir)
+# tokenizer.vocab_size = model.config.vocab_size
+
 tokenizer.added_tokens_encoder["[TGT]"] = 100
 # add new special token
 if "[TGT]" not in tokenizer.additional_special_tokens:
@@ -333,7 +312,6 @@ print(definitions)
 
 record = GlossSelectionRecord("test", sentence_for_bert, sense_keys, definitions, [-1])
 
-print(model.config.vocab_size)
 
 features = _create_features_from_records(
     [record],
@@ -354,8 +332,9 @@ for ftr in features:
 
 with torch.no_grad():
     logits = torch.zeros(len(definitions), dtype=torch.double).to(DEVICE)
+    # print(len(logits))
     for i, bert_input in list(enumerate(features)):
-        print(i)
+        # print(i)
         logits[i] = model.ranking_linear(
             model.bert(
                 input_ids=torch.tensor(bert_input.input_ids, dtype=torch.long)
