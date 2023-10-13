@@ -49,6 +49,8 @@ class WordDistractors:
         )
 
 
+"""
 word = "lion"
 distractors = WordDistractors(word)
 print(distractors.get_best(5))
+"""
