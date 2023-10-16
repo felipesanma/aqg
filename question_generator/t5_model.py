@@ -20,6 +20,7 @@ def question_parser(question: str) -> str:
     return " ".join(question.split(":")[1].split())
 
 
+## Local use
 def generate_questions(
     context: str, answer: str, n_questions: int = 1, model_version: str = "v1"
 ):
@@ -65,11 +66,15 @@ def generate_questions(
     return questions
 
 
-def generate_questions_v2(context: str, answer: str, n_questions: int = 1):
+def generate_questions_v2(
+    context: str, answer: str, n_questions: int = 1, model_version: str = "v1.2"
+):
     model = T5ForConditionalGeneration.from_pretrained(
-        "pipesanma/chasquilla-question-generator"
+        "pipesanma/chasquilla-question-generator", revision=model_version
     )
-    tokenizer = T5Tokenizer.from_pretrained("pipesanma/chasquilla-question-generator")
+    tokenizer = T5Tokenizer.from_pretrained(
+        "pipesanma/chasquilla-question-generator", revision=model_version
+    )
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     # print("device ", device)
@@ -107,8 +112,10 @@ def generate_questions_v2(context: str, answer: str, n_questions: int = 1):
     return questions
 
 
+"""
 context = "President Donald Trump said and predicted that some states would reopen this month."
 answer = "Donald Trump"
 
-questions = generate_questions_v2(context, answer, 1)
+questions = generate_questions_v2(context, answer, 2)
 print(questions)
+"""
