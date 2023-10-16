@@ -9,7 +9,6 @@ class WordDistractors:
         self.word = word
         self.distractor_type = distractor_type
         self.distractors = self.get()
-        # self.filter = TransformersFilter(self.word, self.distractors)
 
     def get_conceptnet_distractor(self):
         c_distractor = ConcepnetDistractors(self.word)
