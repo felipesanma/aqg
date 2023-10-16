@@ -35,12 +35,24 @@ class QuestionGenerator:
         text = f"context: {self.context} answer: {self.answer}"
 
         encoding = tokenizer.encode_plus(
-            text, max_length=512, padding=True, return_tensors="pt"
-        )
-        input_ids, attention_mask = encoding["input_ids"].to(device), encoding[
-            "attention_mask"
-        ].to(device)
+            text,
+            max_length=384,
+            pad_to_max_length=False,
+            truncation=True,
+            return_tensors="pt",
+        ).to(device)
+        input_ids, attention_mask = encoding["input_ids"], encoding["attention_mask"]
 
+        outs = model.generate(
+            input_ids=input_ids,
+            attention_mask=attention_mask,
+            early_stopping=True,
+            num_beams=5,
+            num_return_sequences=1,
+            no_repeat_ngram_size=2,
+            max_length=72,
+        )
+        """
         model.eval()
         beam_outputs = model.generate(
             input_ids=input_ids,
@@ -50,13 +62,17 @@ class QuestionGenerator:
             num_beams=5,
             num_return_sequences=self.n_questions,
         )
+        """
 
         questions = []
 
-        for beam_output in beam_outputs:
+        for beam_output in outs:
+            sent = tokenizer.decode(beam_output, skip_special_tokens=True)
+            """
             sent = tokenizer.decode(
                 beam_output, skip_special_tokens=True, clean_up_tokenization_spaces=True
             )
+            """
 
             questions.append(self._question_parser(sent))
 

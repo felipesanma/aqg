@@ -5,6 +5,7 @@ from nltk.corpus import stopwords
 import traceback
 from nltk.tokenize import sent_tokenize
 from flashtext import KeywordProcessor
+import re
 
 """
 # The 1st time run this
@@ -16,7 +17,7 @@ nltk.download("punkt")
 
 class SentenceMapping:
     def __init__(self, text: str):
-        self.text = text
+        self.text = self._clean_text(text)
         self.sentences = self.tokenize_sentences()
         self.key_words = self.get_noun_adj_verb()
         self.sentence_mapping = self.get_sentences_for_keyword()
@@ -26,6 +27,14 @@ class SentenceMapping:
         word_list = wrapper.wrap(text=self.text)
         for element in word_list:
             print(element)
+
+    def _clean_text(self, s):
+        clean = re.compile("<.*?>")
+        s = re.sub(clean, "", s)
+        s = s.replace("\n", " ").replace("\r", " ")
+        s = s.replace(":selected:", "").replace(":unselected:", "")
+        # s = s.replace('"', "")
+        return s
 
     def tokenize_sentences(self):
         sentences = sent_tokenize(self.text)

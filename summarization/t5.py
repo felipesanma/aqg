@@ -5,9 +5,11 @@ import random
 import numpy as np
 import nltk
 
+"""
 nltk.download("punkt")
 nltk.download("brown")
 nltk.download("wordnet")
+"""
 from nltk.corpus import wordnet as wn
 from nltk.tokenize import sent_tokenize
 
@@ -37,12 +39,18 @@ def postprocesstext(content):
     return final
 
 
-def summarizer(text, model, tokenizer):
+def summarizer(text, model_v1="", tokenizer_v2=""):
+    summary_model = T5ForConditionalGeneration.from_pretrained("t5-base")
+    summary_tokenizer = T5Tokenizer.from_pretrained("t5-base")
+
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    summary_model = summary_model.to(device)
+
     text = text.strip().replace("\n", " ")
     text = "summarize: " + text
     # print (text)
     max_len = 512
-    encoding = tokenizer.encode_plus(
+    encoding = summary_tokenizer.encode_plus(
         text,
         max_length=max_len,
         pad_to_max_length=False,
@@ -52,7 +60,7 @@ def summarizer(text, model, tokenizer):
 
     input_ids, attention_mask = encoding["input_ids"], encoding["attention_mask"]
 
-    outs = model.generate(
+    outs = summary_model.generate(
         input_ids=input_ids,
         attention_mask=attention_mask,
         early_stopping=True,
@@ -63,7 +71,7 @@ def summarizer(text, model, tokenizer):
         max_length=300,
     )
 
-    dec = [tokenizer.decode(ids, skip_special_tokens=True) for ids in outs]
+    dec = [summary_tokenizer.decode(ids, skip_special_tokens=True) for ids in outs]
     summary = dec[0]
     summary = postprocesstext(summary)
     summary = summary.strip()
