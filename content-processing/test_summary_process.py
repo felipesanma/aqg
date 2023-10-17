@@ -1,6 +1,6 @@
 import glob
 import numpy as np
-from custom_splitter import generate_chunks_text
+from splitter import ContentSplitter
 from summarize_langchain import (
     summarize_stage_1,
     create_documents_embeds,
@@ -18,7 +18,7 @@ files = glob.glob("content-processing/*.pdf")
 
 document, all_content, content_per_page = extract_text_with_langchain_pdf(files[0])
 
-chunks_text = generate_chunks_text(all_content)
+chunks_text = ContentSplitter(all_content).generate_chunks_text()
 # Run Stage 1 Summarizing
 stage_1_outputs = summarize_stage_1(chunks_text)
 # Split the titles and summaries
