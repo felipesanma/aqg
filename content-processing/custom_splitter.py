@@ -87,4 +87,7 @@ def generate_chunks_text(
     segments = get_segments(all_content)
     sentences = create_sentences(segments, MIN_WORDS=min_words, MAX_WORDS=max_words)
     chunks = create_chunks(sentences, CHUNK_LENGTH=chunk_lenght, STRIDE=stride)
-    return [chunk["text"] for chunk in chunks]
+    chunks = [chunk["text"] for chunk in chunks]
+    while "" in chunks:
+        chunks.remove("")
+    return chunks
