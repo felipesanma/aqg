@@ -76,9 +76,10 @@ believe in crypto, but it can't drive a massive increase in fossil fuel use, esp
 the cryptocurrency has stabilised since.   A number of Twitter users welcomed Musk's statement. One of them said it's time people started realising
 that Dogecoin “is here to stay” and another referred to Musk's previous assertion that crypto could become the world's future currency."""
 questions_number = 5
-
+"""
 questions_generator = QGenOpenai(text, questions_number)
 questions = questions_generator.generate()
 print(questions)
 print(type(questions))
 print(len(questions))
+"""

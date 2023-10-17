@@ -1,4 +1,5 @@
 import pandas as pd
+import random
 
 
 class ContentSplitter:
@@ -96,3 +97,13 @@ class ContentSplitter:
         while "" in chunks:
             chunks.remove("")
         return chunks
+
+    def get_random_chunks(self, chunks: list, n_choices):
+        choices = []
+
+        for i in range(n_choices):
+            sample = random.choice(chunks)
+            if sample not in choices:
+                choices.append(sample)
+
+        return choices
