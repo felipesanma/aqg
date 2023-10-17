@@ -58,7 +58,7 @@ class QGenOpenai:
 
     def generate(self):
         response = openai.ChatCompletion.create(
-            model="gpt-4",
+            model="gpt-3.5-turbo",  # "gpt-4",
             messages=[{"role": "user", "content": text}],
             functions=self.mcq_function,
             function_call={"name": "create_mcq"},
