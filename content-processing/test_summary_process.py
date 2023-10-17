@@ -25,6 +25,7 @@ stage_1_outputs = summarize_stage_1(chunks_text)
 stage_1_summaries = [e["summary"] for e in stage_1_outputs]
 stage_1_titles = [e["title"] for e in stage_1_outputs]
 num_1_chunks = len(stage_1_summaries)
+
 # print(stage_1_summaries)
 # print(stage_1_titles)
 # print(num_1_chunks)
@@ -58,15 +59,3 @@ final_summary = out["final_summary"]
 print(stage_2_outputs)
 
 print(final_summary)
-
-
-all_lens = []
-for i, _ in enumerate(chunks_text):
-    print(f"chunk # {i}, size: {len(chunks_text[i])}")
-    print("--------------------")
-    print("\n")
-    print(chunks_text[i])
-    print("\n")
-    all_lens.append(len(chunks_text[i]))
-
-print(max(all_lens))
