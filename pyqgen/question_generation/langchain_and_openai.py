@@ -80,6 +80,7 @@ transaction, and hence was suspending vehicle purchases using the cryptocurrency
 believe in crypto, but it can't drive a massive increase in fossil fuel use, especially coal”.  It triggered a downward spiral for Bitcoin value but
 the cryptocurrency has stabilised since.   A number of Twitter users welcomed Musk's statement. One of them said it's time people started realising
 that Dogecoin “is here to stay” and another referred to Musk's previous assertion that crypto could become the world's future currency."""
-
+"""
 qgen = QGenLangChain(text)
 print(qgen.generate())
+"""
