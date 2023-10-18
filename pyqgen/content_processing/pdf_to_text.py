@@ -25,7 +25,7 @@ class PDF2text:
         # s = s.replace(".", "")
         return s
 
-    def extract_text_with_langchain_pdf(self, *, pdf_file):
+    def extract(self, *, pdf_file):
         loader = UnstructuredFileLoader(pdf_file, strategy="fast", mode="elements")
         documents = loader.load()
 
@@ -36,4 +36,4 @@ class PDF2text:
         for k, v in content_per_page.items():
             content_per_page[k] = self.clean_text(s=v)
 
-        return documents, clean_content, content_per_page
+        return clean_content
