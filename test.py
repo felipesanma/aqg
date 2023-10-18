@@ -18,13 +18,13 @@ topics = pyqgen.topics.classify(chunks_text=chunks_text)
 topics_cluster = topics["topics"]
 print(topics_cluster)
 sorted_topics_cluster = pyqgen.topics.get_sorted_candidates_by_topic(
-    chunks_text=chunks_text, topics=topics_cluster
+    chunks_text=chunks_text,  # topics=topics_cluster
 )
 
 print(sorted_topics_cluster)
-
+n_choices = 10
 custom_chunks = pyqgen.splitter.get_custom_chunks(
-    chunks=chunks_text, index_list=sorted_topics_cluster
+    chunks=chunks_text, index_list=sorted_topics_cluster, n_choices=n_choices
 )
 
 

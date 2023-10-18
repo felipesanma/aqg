@@ -124,7 +124,7 @@ class TopicsDetection:
 
         return {"chunk_topics": chunk_topics, "topics": topics_title}
 
-    def classify(self, *, chunks_text, num_topics: int = 10):
+    def classify(self, *, chunks_text, num_topics: int = 8):
         embeddings = self.get_embeddings(sentences=chunks_text)
 
         similarity_matrix = self.create_similarity_matrix(content_embeds=embeddings)
@@ -140,7 +140,7 @@ class TopicsDetection:
         self, *, chunks_text, topics=None, dsc: bool = True
     ):
         if topics is None:
-            topics = self.classify(chunks_text=chunks_text)
+            topics = self.classify(chunks_text=chunks_text)["topics"]
         sorted_topics_cluster = []
 
         for topic in topics:
