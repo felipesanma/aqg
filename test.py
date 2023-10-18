@@ -10,11 +10,6 @@ content = pyqgen.pdf_to_text.extract(pdf_file=files[0])
 
 chunks_text = pyqgen.splitter.generate_chunks_text(content=content)
 
-choices = 5
-random_chunks_choices = pyqgen.splitter.get_random_chunks(
-    chunks=chunks_text, n_choices=choices
-)
-
 
 def log_chunks(chunks: list):
     print(" ")
@@ -26,6 +21,12 @@ def log_chunks(chunks: list):
     print(" ")
     print(len(chunks))
     print(" ")
+
+
+choices = 5
+random_chunks_choices = pyqgen.splitter.get_random_chunks(
+    chunks=chunks_text, n_choices=choices
+)
 
 
 log_chunks(random_chunks_choices)
