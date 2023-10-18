@@ -99,12 +99,17 @@ class ContentSplitter:
             chunks.remove("")
         return chunks
 
-    def get_random_chunks(self, *, chunks: list, n_choices: int = 5):
+    def get_random_chunks(
+        self, *, chunks: list, n_choices: int = 5, n_characters: int = 2000
+    ):
         choices = []
-
-        for i in range(n_choices):
+        while len(choices) < n_choices:
             sample = random.choice(chunks)
-            if sample not in choices:
+            if sample not in choices and len(sample) >= n_characters:
                 choices.append(sample)
-
         return choices
+
+    def get_largest_chunks(self, *, chunks: list, n_choices: int = 5):
+        sorted_list = sorted(chunks, key=len, reverse=True)
+
+        return sorted_list[:n_choices]
