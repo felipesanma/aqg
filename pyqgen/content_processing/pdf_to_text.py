@@ -34,6 +34,6 @@ class PDF2text:
 
         content_per_page = self.group_content_per_page(documents=documents)
         for k, v in content_per_page.items():
-            content_per_page[k] = self.clean_text(v)
+            content_per_page[k] = self.clean_text(s=v)
 
         return documents, clean_content, content_per_page
