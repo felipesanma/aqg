@@ -1,5 +1,5 @@
 from .content_processing import ContentSplitter, PDF2text
-from .question_generation import QGenLangChain, QGenOpenai
+from .question_generation import QGenOpenai
 
 
 class PyQGen:

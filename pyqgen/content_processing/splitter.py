@@ -3,16 +3,13 @@ import random
 
 
 class ContentSplitter:
-    def __init__(
-        self,
-        content: str,
-    ):
-        self.content = content
+    def __init__(self) -> None:
+        pass
 
-    def clean_text_v2(self, s: str) -> str:
+    def clean_text_v2(self, *, s: str) -> str:
         return s.replace("\n", " ")
 
-    def get_segments(self, txt):
+    def get_segments(self, *, txt: str):
         segments = txt.split(".")
         # Put the . back in
         segments = [segment + "." for segment in segments]
@@ -22,7 +19,7 @@ class ContentSplitter:
         segments = [item for sublist in segments for item in sublist]
         return segments
 
-    def create_sentences(self, segments, MIN_WORDS, MAX_WORDS):
+    def create_sentences(self, *, segments, MIN_WORDS, MAX_WORDS):
         # Combine the non-sentences together
         sentences = []
 
@@ -60,7 +57,7 @@ class ContentSplitter:
 
         return sentences
 
-    def create_chunks(self, sentences, CHUNK_LENGTH, STRIDE):
+    def create_chunks(self, *, sentences, CHUNK_LENGTH, STRIDE):
         sentences_df = pd.DataFrame(sentences)
 
         chunks = []
@@ -82,23 +79,27 @@ class ContentSplitter:
 
     def generate_chunks_text(
         self,
+        *,
+        content,
         min_words: int = 35,
         max_words: int = 100,
         chunk_lenght: int = 8,
         stride: int = 1,
     ):
-        all_content = self.clean_text_v2(self.content)
-        segments = self.get_segments(all_content)
+        all_content = self.clean_text_v2(s=content)
+        segments = self.get_segments(txt=all_content)
         sentences = self.create_sentences(
-            segments, MIN_WORDS=min_words, MAX_WORDS=max_words
+            segments=segments, MIN_WORDS=min_words, MAX_WORDS=max_words
         )
-        chunks = self.create_chunks(sentences, CHUNK_LENGTH=chunk_lenght, STRIDE=stride)
+        chunks = self.create_chunks(
+            sentences=sentences, CHUNK_LENGTH=chunk_lenght, STRIDE=stride
+        )
         chunks = [chunk["text"] for chunk in chunks]
         while "" in chunks:
             chunks.remove("")
         return chunks
 
-    def get_random_chunks(self, chunks: list, n_choices):
+    def get_random_chunks(self, *, chunks: list, n_choices: int = 5):
         choices = []
 
         for i in range(n_choices):
