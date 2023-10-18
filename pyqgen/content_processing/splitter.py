@@ -101,12 +101,11 @@ class ContentSplitter:
 
     def get_random_chunks(self, *, chunks: list, n_choices: int = 5):
         n_characters = sum(map(len, chunks)) / len(chunks)
-        print(n_characters)
+
         choices = []
         while len(choices) < n_choices:
             sample = random.choice(chunks)
             if sample not in choices and len(sample) >= n_characters:
-                print(n_characters)
                 choices.append(sample)
         return choices
 
@@ -114,3 +113,19 @@ class ContentSplitter:
         sorted_list = sorted(chunks, key=len, reverse=True)
 
         return sorted_list[:n_choices]
+
+    def get_custom_chunks(self, *, chunks: list, index_list: list, n_choices: int = 5):
+        n_characters = sum(map(len, chunks)) / len(chunks)
+        index_choices = []
+        row = 0
+        column = 0
+        while len(index_choices) < n_choices:
+            if len(chunks[index_list[column][row]]) >= n_characters:
+                index_choices.append(index_list[column][row])
+            print(column, row)
+            if column == len(index_list):
+                row += 1
+                column = 0
+            else:
+                column += 1
+        return [chunks[index] for index in index_choices]

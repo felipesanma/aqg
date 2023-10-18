@@ -1,4 +1,4 @@
-from .content_processing import ContentSplitter, PDF2text
+from .content_processing import ContentSplitter, PDF2text, TopicsDetection
 from .question_generation import QGenOpenai
 
 
@@ -7,6 +7,4 @@ class PyQGen:
         self.splitter = ContentSplitter()
         self.pdf_to_text = PDF2text()
         self.questions = QGenOpenai()
-
-    def _questions_init(self):
-        pass
+        self.topics = TopicsDetection()
