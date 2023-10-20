@@ -49,20 +49,75 @@ class QGenOpenai:
             }
         ]
 
+    def _create_summary_function(self, max_words: int = 80):
+        return [
+            {
+                "name": "create_summary",
+                "description": f"Create an executive summary of the input text. Use about {max_words}. At the end provide 3 interesting questions that can be answered with the input text",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "summaries": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "summary": {
+                                        "type": "string",
+                                        "description": "A summary from the input text.",
+                                    },
+                                    "questions": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "description": "An interesting question extracted from the input text.",
+                                        },
+                                    },
+                                },
+                            },
+                        }
+                    },
+                },
+                "required": ["summaries"],
+            }
+        ]
+
     def _output_parser(self, openai_repsonse):
         return json.loads(
             openai_repsonse["choices"][0]["message"]["function_call"]["arguments"]
         )
 
     def generate(
-        self, *, content: str, questions_number: int = 1, model: str = "gpt-3.5-turbo"
+        self,
+        *,
+        content: str,
+        function: str = "mcq",
+        questions_number: int = 1,
+        max_words: int = 100,
+        model: str = "gpt-3.5-turbo",
+        language: str = "Spanish",
     ):
-        mcq_function = self._create_mcq_function(questions_number=questions_number)
+        if function == "mcq":
+            openai_function = self._create_mcq_function(
+                questions_number=questions_number
+            )
+            funciont_call = "create_mcq"
+
+        elif function == "summary":
+            openai_function = self._create_summary_function(max_words=max_words)
+            funciont_call = "create_summary"
+
         response = openai.ChatCompletion.create(
             model=model,  # "gpt-4",
-            messages=[{"role": "user", "content": content}],
-            functions=mcq_function,
-            function_call={"name": "create_mcq"},
+            messages=[
+                {
+                    "role": "system",
+                    "content": f"You always answer in {language}.",
+                },
+                {"role": "user", "content": content},
+            ],
+            functions=openai_function,
+            function_call={"name": funciont_call},
         )
         return self._output_parser(response)
 

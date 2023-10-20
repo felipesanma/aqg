@@ -124,7 +124,7 @@ class ContentSplitter:
         while len(index_choices) < n_choices:
             if len(chunks[index_list[column][row]]) >= n_characters:
                 index_choices.append(index_list[column][row])
-            print(column, row)
+
             if column == (len(index_list) - 1):
                 row += 1
                 column = 0
