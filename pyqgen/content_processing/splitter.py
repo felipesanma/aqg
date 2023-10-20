@@ -38,7 +38,9 @@ class ContentSplitter:
 
             # If exceed MAX_WORDS, then stop at the end of the segment
             # Only consider it a sentence if the length is at least MIN_WORDS
-            if (
+            if len(segments[i]) == 0:
+                continue
+            elif (
                 sentence_length >= MIN_WORDS and segments[i][-1] == "."
             ) or sentence_length >= MAX_WORDS:
                 sentence = " ".join(sentence_segments)

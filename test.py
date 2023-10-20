@@ -1,17 +1,15 @@
 from pyqgen import PyQGen
 import glob
 
-
 pyqgen = PyQGen()
 
 files = glob.glob("*.pdf")
 
-content = pyqgen.pdf_to_text.extract(pdf_file=files[0])
+content, content_per_page = pyqgen.pdf_to_text.extract(pdf_file=files[0])
+
 
 chunks_text = pyqgen.splitter.generate_chunks_text(content=content)
-
-print(len(chunks_text))
-
+"""
 topics = pyqgen.topics.classify(chunks_text=chunks_text)
 
 
@@ -41,7 +39,7 @@ def log_chunks(chunks: list):
 
 
 log_chunks(custom_chunks)
-
+"""
 """
 def log_chunks(chunks: list):
     print(" ")
