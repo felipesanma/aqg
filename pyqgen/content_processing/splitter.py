@@ -79,14 +79,19 @@ class ContentSplitter:
         chunks_df = pd.DataFrame(chunks)
         return chunks_df.to_dict("records")
 
+    def clean_text_v3(self, *, s: str) -> str:
+        s = s.split(".")
+        s = " ".join(text + "." for text in s if len(text) > 1)
+        return s
+
     def generate_chunks_text(
         self,
         *,
         content,
-        min_words: int = 35,
+        min_words: int = 40,
         max_words: int = 100,
         chunk_lenght: int = 8,
-        stride: int = 1,
+        stride: int = 0,
     ):
         all_content = self.clean_text_v2(s=content)
         segments = self.get_segments(txt=all_content)
@@ -96,9 +101,10 @@ class ContentSplitter:
         chunks = self.create_chunks(
             sentences=sentences, CHUNK_LENGTH=chunk_lenght, STRIDE=stride
         )
-        chunks = [chunk["text"] for chunk in chunks]
+        chunks = [self.clean_text_v3(s=chunk["text"]) for chunk in chunks]
         while "" in chunks:
             chunks.remove("")
+
         return chunks
 
     def get_random_chunks(self, *, chunks: list, n_choices: int = 5):

@@ -19,6 +19,7 @@ class PDF2text:
         clean = re.compile("<.*?>")
         s = re.sub(clean, "", s)
         s = s.replace("\r", " ")
+        s = re.sub(r"\.+", ".", s)
         # s = s.replace("\n", " ").replace("\r", " ")
         # s = s.replace(":selected:", "").replace(":unselected:", "")
         # s = s.replace('\"', '')
