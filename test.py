@@ -10,31 +10,9 @@ content, content_per_page = pyqgen.pdf_to_text.extract(pdf_file=files[0])
 
 chunks_text = pyqgen.splitter.generate_chunks_text(content=content)
 
-pages = list(content_per_page.keys())
-pages_ready = []
-mapping = []
-
-for chunk in chunks_text:
-    chunk_length = len(chunk)
-    acum_length = 0
-    tmp_pages = []
-
-    while acum_length < chunk_length:
-        if len(pages_ready) == len(pages):
-            page = pages[-1]
-            acum_length += chunk_length
-        else:
-            page = pages[len(pages_ready)]
-        acum_length += len(content_per_page[page])
-        if page not in pages_ready:
-            pages_ready.append(page)
-        tmp_pages.append(page)
-    tmp_pages = list(dict.fromkeys(tmp_pages))
-    mapping.append(tmp_pages)
-    diff = acum_length - chunk_length
-    content_per_page[page] = content_per_page[page][:diff]
-    pages_ready.pop()
-
+mapping = pyqgen.get_pages_mapping_per_chunk(
+    chunks_text=chunks_text, content_per_page=content_per_page
+)
 print(mapping)
 print(len(mapping))
 print(len(chunks_text))
