@@ -136,4 +136,4 @@ class ContentSplitter:
                 column = 0
             else:
                 column += 1
-        return [chunks[index] for index in index_choices]
+        return index_choices

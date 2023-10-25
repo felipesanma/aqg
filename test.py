@@ -13,36 +13,31 @@ chunks_text = pyqgen.splitter.generate_chunks_text(content=content)
 mapping = pyqgen.get_pages_mapping_per_chunk(
     chunks_text=chunks_text, content_per_page=content_per_page
 )
+
 print(mapping)
-print(len(mapping))
-print(len(chunks_text))
-
-for i, chunk in enumerate(chunks_text):
-    print(" ")
-    print(mapping[i])
-    print(chunk)
-    print(" ")
-    if i == 30:
-        break
-
-
-"""
 topics = pyqgen.topics.classify(chunks_text=chunks_text)
 
 
 topics_cluster = topics["topics"]
-# print(topics_cluster)
+print(topics_cluster)
 sorted_topics_cluster = pyqgen.topics.get_sorted_candidates_by_topic(
     chunks_text=chunks_text,  # topics=topics_cluster
 )
 
-# print(sorted_topics_cluster)
+print(sorted_topics_cluster)
 n_choices = 8
-custom_chunks = pyqgen.splitter.get_custom_chunks(
+index_custom_chunks = pyqgen.splitter.get_custom_chunks(
     chunks=chunks_text, index_list=sorted_topics_cluster, n_choices=n_choices
 )
 
+print(index_custom_chunks)
+for i in index_custom_chunks:
+    print("")
+    print(mapping[i])
+    print(chunks_text[i])
+    print("")
 
+"""
 if len(custom_chunks) < 11:
     summaries = []
     questions = []

@@ -106,7 +106,7 @@ class TopicsDetection:
 
         # Set the chosen partitioning to be the one with highest modularity
         topics_title = topics_title_accepted[lowest_sd_iteration]
-        print(f"Best SD: {lowest_sd}, Best iteration: {lowest_sd_iteration}")
+        # print(f"Best SD: {lowest_sd}, Best iteration: {lowest_sd_iteration}")
 
         topic_id_means = [sum(e) / len(e) for e in topics_title]
         # Arrange title_topics in order of topic_id_means
