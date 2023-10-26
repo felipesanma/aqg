@@ -35,11 +35,10 @@ for i in index_custom_chunks:
     print("")
     print(mapping[i])
     print(chunks_text[i])
+    print(len(chunks_text[i]))
     mcq_questions = pyqgen.mcq.generate_mcq_questions(content=chunks_text[i])
     print(mcq_questions)
     print("")
-    break
-
 
 """
 if len(custom_chunks) < 11:
