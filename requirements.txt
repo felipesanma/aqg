@@ -13,3 +13,4 @@ flashtext
 git+https://github.com/boudinfl/pke.git
 sacremoses
 youtube_transcript_api
+youtube-search-python

@@ -1,4 +1,4 @@
-from .content_processing import ContentSplitter, PDF2text, TopicsDetection
+from .content_processing import ContentSplitter, PDF2text, TopicsDetection, YT2text
 from .question_generation import MCQ, Summary
 
 
@@ -6,6 +6,7 @@ class PyQGen:
     def __init__(self) -> None:
         self.splitter = ContentSplitter()
         self.pdf_to_text = PDF2text()
+        self.youtube_video_to_text = YT2text()
         self.mcq = MCQ()
         self.summary = Summary()
         self.topics = TopicsDetection()
