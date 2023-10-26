@@ -1,12 +1,13 @@
 from .content_processing import ContentSplitter, PDF2text, TopicsDetection
-from .question_generation import QGenOpenai
+from .question_generation import MCQ, Summary
 
 
 class PyQGen:
     def __init__(self) -> None:
         self.splitter = ContentSplitter()
         self.pdf_to_text = PDF2text()
-        self.questions = QGenOpenai()
+        self.mcq = MCQ()
+        self.summary = Summary()
         self.topics = TopicsDetection()
 
     def get_pages_mapping_per_chunk(
