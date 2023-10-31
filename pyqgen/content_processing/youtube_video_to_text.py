@@ -35,7 +35,6 @@ class YT2text:
                     "start_time": start_time,
                     "end_time": text["start"],
                 }
-                print(tmp_element)
                 mapping.append(tmp_element)
                 tmp_text = ""
                 start_time = text["start"]
