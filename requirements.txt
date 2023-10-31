@@ -15,3 +15,4 @@ sacremoses
 youtube_transcript_api
 youtube-search-python
 git+https://github.com/openai/whisper.git 
+lingua-language-detector
