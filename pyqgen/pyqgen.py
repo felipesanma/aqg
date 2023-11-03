@@ -1,4 +1,10 @@
-from .content_processing import ContentSplitter, PDF2text, TopicsDetection, YT2text
+from .content_processing import (
+    ContentSplitter,
+    PDF2text,
+    TopicsDetection,
+    YT2text,
+    LangDetect,
+)
 from .question_generation import MCQ, Summary
 
 
@@ -10,6 +16,7 @@ class PyQGen:
         self.mcq = MCQ()
         self.summary = Summary()
         self.topics = TopicsDetection()
+        self.lang_detector = LangDetect()
 
     def get_pages_mapping_per_chunk(
         self, *, chunks_text: list, content_per_page: dict
