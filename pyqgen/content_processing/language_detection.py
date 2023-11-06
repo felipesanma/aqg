@@ -17,6 +17,7 @@ class LangDetect:
         detector = LanguageDetectorBuilder.from_languages(*self.languages).build()
         language = detector.detect_language_of(text)
         if not language:
-            print("Error")
-            return {"error": f"language not detected. language: {language}"}
+            error_msg = f"language not detected. language: {language}"
+            print(error_msg)
+            return {"error": error_msg}
         return self.mapping[language.name]
