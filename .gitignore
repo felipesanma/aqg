@@ -145,6 +145,9 @@ myenv
 # PDF extensions
 *.pdf
 
+# MP3 extensions
+*.mp3
+
 # Model Generation
 dataset
 model
