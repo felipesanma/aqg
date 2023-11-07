@@ -40,9 +40,14 @@ class MCQ(BaseOpenAI):
         ]
 
     def generate_mcq_questions(
-        self, *, content: str, questions_number: int = 4, language: str = "Spanish"
+        self,
+        *,
+        content: str,
+        questions_number: int = 4,
+        language: str = "Spanish",
+        model: str = "gpt-3.5-turbo",
     ):
         function = self.create_mcq_function(questions_number=questions_number)
         return self.generate(
-            content=content, openai_function=function, language=language
+            content=content, openai_function=function, language=language, model=model
         )

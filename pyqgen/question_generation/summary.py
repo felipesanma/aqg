@@ -36,9 +36,14 @@ class Summary(BaseOpenAI):
         ]
 
     def generate_summary(
-        self, *, content: str, max_words: int = 80, language: str = "Spanish"
+        self,
+        *,
+        content: str,
+        max_words: int = 80,
+        language: str = "Spanish",
+        model: str = "gpt-3.5-turbo",
     ):
         function = self.create_summary_function(max_words=max_words)
         return self.generate(
-            content=content, openai_function=function, language=language
+            content=content, openai_function=function, language=language, model=model
         )

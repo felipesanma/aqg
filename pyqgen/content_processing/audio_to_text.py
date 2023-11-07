@@ -40,8 +40,9 @@ class Audio2text:
 
         audio_mapping = {
             "file_name": audio_file,
-            "title": audio_info["title"],
-            "duration": audio_info["duration"],
+            "title": audio_info.title,
+            "duration": audio_info.duration,
+            "language": transcript["language"],
             "transcription": transcript["text"],
             "timestamp_and_content_mapping": mapping,
         }
