@@ -2,32 +2,17 @@ from .openai_base import BaseOpenAI
 
 
 class Summary(BaseOpenAI):
-    def create_summary_function(self, max_words: int = 80):
+    def create_summary_function(self, max_words: int = 250):
         return [
             {
                 "name": "create_summary",
-                "description": f"Create an executive summary of the input text. Use about {max_words}. At the end provide 3 interesting questions that can be answered with the input text",
+                "description": f"Create an executive summary of the input text. Use about {max_words}.",
                 "parameters": {
                     "type": "object",
                     "properties": {
-                        "summaries": {
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "summary": {
-                                        "type": "string",
-                                        "description": "A summary from the input text.",
-                                    },
-                                    "questions": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "string",
-                                            "description": "An interesting question extracted from the input text.",
-                                        },
-                                    },
-                                },
-                            },
+                        "summary": {
+                            "type": "string",
+                            "description": "A summary from the input text.",
                         }
                     },
                 },
