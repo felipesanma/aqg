@@ -7,14 +7,18 @@ files = glob.glob("*.pdf")
 
 content, content_per_page = pyqgen.pdf_to_text.extract(pdf_file=files[0])
 
-"""
+
 chunks_text = pyqgen.splitter.generate_chunks_text(content=content)
+
+print(len(chunks_text))
 
 mapping = pyqgen.get_pages_mapping_per_chunk(
     chunks_text=chunks_text, content_per_page=content_per_page
 )
 
 print(mapping)
+
+
 topics = pyqgen.topics.classify(chunks_text=chunks_text)
 
 
@@ -39,13 +43,14 @@ for i in index_custom_chunks:
     mcq_questions = pyqgen.mcq.generate_mcq_questions(content=chunks_text[i])
     print(mcq_questions)
     print("")
-"""
-model = "gpt-4-1106-preview"
-summary = pyqgen.summary.generate_summary(content=content, model=model)
 
-print(summary)
-mcq_questions_gpt_4 = pyqgen.mcq.generate_mcq_questions(content=content, model=model)
-print(mcq_questions_gpt_4)
+print(len(content))
+# model = "gpt-4-1106-preview"
+# summary = pyqgen.summary.generate_summary(content=content, model=model)
+
+# print(summary)
+# mcq_questions_gpt_4 = pyqgen.mcq.generate_mcq_questions(content=content, model=model)
+# print(mcq_questions_gpt_4)
 
 """
 if len(custom_chunks) < 11:
