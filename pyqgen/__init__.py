@@ -6,5 +6,6 @@ from .content_processing import (
     LangDetect,
     YT2text,
     Audio2text,
+    Web2text,
 )
 from .question_generation import MCQ, Summary

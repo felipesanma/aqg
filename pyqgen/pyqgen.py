@@ -5,6 +5,7 @@ from .content_processing import (
     YT2text,
     LangDetect,
     Audio2text,
+    Web2text,
 )
 from .question_generation import MCQ, Summary
 
@@ -19,6 +20,7 @@ class PyQGen:
         self.topics = TopicsDetection()
         self.lang_detector = LangDetect()
         self.audio_to_text = Audio2text()
+        self.web_to_text = Web2text()
 
     def get_pages_mapping_per_chunk(
         self, *, chunks_text: list, content_per_page: dict

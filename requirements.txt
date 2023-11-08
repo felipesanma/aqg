@@ -18,3 +18,5 @@ git+https://github.com/openai/whisper.git
 lingua-language-detector
 whisper
 tinytag
+beautifulsoup4
+trafilatura
