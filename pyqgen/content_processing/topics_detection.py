@@ -78,9 +78,6 @@ class TopicsDetection:
 
         topic_sizes = [len(c) for c in topics_title]
         sizes_sd = np.std(topic_sizes)
-        modularity = community.modularity(
-            title_nx_graph, topics_title, weight="weight", resolution=resolution
-        )
 
         lowest_sd_iteration = 0
         # Set lowest sd to inf
@@ -89,9 +86,6 @@ class TopicsDetection:
         for i in range(iterations):
             topics_title = community.louvain_communities(
                 title_nx_graph, weight="weight", resolution=resolution
-            )
-            modularity = community.modularity(
-                title_nx_graph, topics_title, weight="weight", resolution=resolution
             )
 
             # Check SD
