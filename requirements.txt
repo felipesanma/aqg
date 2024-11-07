@@ -20,3 +20,4 @@ whisper
 tinytag
 beautifulsoup4
 trafilatura
+langchain

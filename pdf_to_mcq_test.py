@@ -7,7 +7,6 @@ files = glob.glob("*.pdf")
 
 content, content_per_page = pyqgen.pdf_to_text.extract(pdf_file=files[0])
 
-
 chunks_text = pyqgen.splitter.generate_chunks_text(content=content)
 
 print(len(chunks_text))
@@ -18,9 +17,7 @@ mapping = pyqgen.get_pages_mapping_per_chunk(
 
 print(mapping)
 
-
 topics = pyqgen.topics.classify(chunks_text=chunks_text)
-
 
 topics_cluster = topics["topics"]
 print(topics_cluster)
