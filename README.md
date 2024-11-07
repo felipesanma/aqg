@@ -2,38 +2,39 @@
 Automatic Question Generation
 
 
-### Configuración del entorno virtual
+### Virtual Environment Setup
 
-Crear un ambiente virtual para instalar las dependencias a nivel de proyecto con el siguiente comando:
+Create a virtual environment to install project-level dependencies with the following command:
 
 Windows:
 ```
-py -m venv nombre_env
+py -m venv env_name
 ```
 
-Linux y macOS:
+Linux/macOS:
 ```
-python3 -m venv nombre_env
+python3 -m venv env_name
 ```
 
-Después de ejecutar estos comandos, se creará una carpeta con el nombre del entorno virtual en el directorio actual. Para activar el entorno virtual, sigue estos pasos adicionales:
+After executing these commands, a folder with the name of the virtual environment will be created in the current directory. To activate the virtual environment, follow these additional steps:
 
 Windows (PowerShell):
 ```
-.\nombre_env\Scripts\Activate.ps1
+.\env_name\Scripts\Activate.ps1
 ```
 
 Windows (Command Prompt):
 ```
-nombre_env\Scripts\activate.bat
+env_name\Scripts\activate.bat
 ```
 
-Linux y macOS:
+Linux/macOS:
 ```
-source nombre_env/bin/activate
+source env_name/bin/activate
 ```
 
-Una vez inicializado tu entorno virtual puedes instalar las dependencias con el siguiente comando:
+Once your virtual environment is initialized, you can install the dependencies with the following command:
+
 
 Windows:
 ```
